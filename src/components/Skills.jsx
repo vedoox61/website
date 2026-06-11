@@ -59,7 +59,7 @@ export default function Skills() {
 
       </div>
 
-     {/* 🔥 EDUCATION */}
+      {/* 🔥 EDUCATION */}
       <div className="w-full my-8 py-10 lg:my-16 lg:py-16 bg-white">
         <motion.h2 className="text-2xl lg:text-4xl text-center font-bold tracking-wide">
           My{" "}
@@ -96,42 +96,6 @@ export default function Skills() {
         </div>
       </div>
 
-        <div className="px-5 lg:px-28 mt-10 space-y-8">
-
-          {/* UNIVERSITY */}
-          <div className="border border-gray-300 p-6 rounded-lg hover:border-red-600 transition">
-            <h2 className="text-xl lg:text-2xl font-semibold">
-              Computer Science Student at{" "}
-              <span className="text-red-600">USTHB</span>
-            </h2>
-            <p className="text-gray-500 mt-3">
-              University of Science and Technology Houari Boumediene
-            </p>
-          </div>
-
-          {/* STATS */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-10">
-
-            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
-              <h2 className="text-3xl font-bold">+150</h2>
-              <p>Projects Completed</p>
-            </div>
-
-            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
-              <h2 className="text-3xl font-bold">+2 Years</h2>
-              <p>Experience</p>
-            </div>
-
-            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
-              <h2 className="text-3xl font-bold">Fullstack</h2>
-              <p>Developer</p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
     </div>
   );
 }

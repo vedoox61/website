@@ -44,7 +44,7 @@ export default function Navbar() {
           className="text-2xl lg:text-3xl font-extrabold cursor-pointer tracking-widest"
           whileHover={{ scale: 1.1 }}
         >
-          <span className="text-red-600">A</span>RAHIM
+          <span className="text-red-600">B</span>RAHIM
         </motion.h1>
 
         <ul className="hidden lg:flex items-center gap-x-7 font-semibold">
