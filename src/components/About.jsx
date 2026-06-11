@@ -41,20 +41,37 @@ export default function About() {
         <div className="w-16 h-[3px] bg-red-600 mt-2 mb-6 rounded"></div>
 
         <p className="text-gray-500 text-sm/6 lg:text-base mt-5 lg:mt-6 leading-relaxed">
-          I'm a Cybersecurity student at{" "}
-          <span className="text-red-600 font-semibold">Code 212 — Ibn Zohr University, Agadir</span>,
-          passionate about ethical hacking, penetration testing, and building secure systems.
+          I'm a Law student at{" "}
+          <span className="text-red-600 font-semibold">
+            Faculty of Law, Economics & Social Sciences — Ibn Zohr University, Agadir
+          </span>
+          , and a member of the{" "}
+          <span className="text-red-600 font-semibold">Code 212</span> coding
+          center, passionate about ethical hacking, penetration testing, and
+          building secure systems.
         </p>
+
         <p className="text-gray-500 text-sm/6 lg:text-base mt-4 leading-relaxed">
           I specialize in{" "}
           <span className="text-red-600 font-semibold">
             Cybersecurity & Web Development
           </span>{" "}
-          — from WiFi pentesting and CTF challenges to building full-stack web apps with React and Node.js.
+          — from WiFi pentesting and CTF challenges to building full-stack web
+          apps with React and Node.js.
         </p>
+
         <p className="text-gray-500 text-sm/6 lg:text-base mt-4 leading-relaxed">
-          When I'm not hunting vulnerabilities or writing code, you'll find me at the skate park
-          or grinding through HackTheBox machines from my room in Agadir.
+          When I'm not hunting vulnerabilities or writing code, you'll find me
+          at the skate park or grinding through{" "}
+          
+            href="https://profile.hackthebox.com/profile/019ea113-7a11-72d4-8b66-d5949b868a01"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-600 font-semibold hover:underline"
+          >
+            HackTheBox
+          </a>{" "}
+          machines from my room in Agadir.
         </p>
 
         {/* TAGS */}
