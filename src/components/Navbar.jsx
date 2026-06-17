@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TbDownload } from "react-icons/tb";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
+import { TbExternalLink } from "react-icons/tb";
+
+const navLinks = ["about", "skills", "projects", "contact"];
 
 export default function Navbar() {
   const [hasShadow, setHasShadow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasShadow(window.scrollY > 0);
-    };
-
+    const handleScroll = () => setHasShadow(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -37,8 +36,6 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
-
-        {/* 🔥 TEXT LOGO */}
         <motion.h1
           onClick={() => scrollToSection("home")}
           className="text-2xl lg:text-3xl font-extrabold cursor-pointer tracking-widest"
@@ -48,8 +45,8 @@ export default function Navbar() {
         </motion.h1>
 
         <ul className="hidden lg:flex items-center gap-x-7 font-semibold">
-          {["about", "skills", "projects", "contact"].map((section) => (
-            <motion.li key={section} whileHover={{ scale: 1.1 }} className="group">
+          {navLinks.map((section) => (
+            <motion.li key={section} whileHover={{ scale: 1.05 }} className="group">
               <button onClick={() => scrollToSection(section)}>
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
@@ -58,17 +55,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* 🔥 BUTTON */}
-        <motion.a
-          href=""
-          className="hidden relative lg:inline-block px-4 py-2 font-medium group"
+        <button
+          onClick={() => scrollToSection("contact")}
+          className="hidden relative lg:inline-flex items-center px-5 py-2 font-medium group"
         >
           <span className="absolute inset-0 w-full h-full transition transform translate-x-1 translate-y-1 bg-red-600 group-hover:translate-x-0 group-hover:translate-y-0"></span>
           <span className="absolute inset-0 w-full h-full border-2 border-red-600"></span>
           <span className="relative text-black group-hover:text-white flex items-center gap-x-3 transition">
-            Resume <TbDownload size={16} />
+            Contact <TbExternalLink size={16} />
           </span>
-        </motion.a>
+        </button>
 
         <motion.button
           className="lg:hidden text-2xl text-black"
@@ -79,7 +75,6 @@ export default function Navbar() {
         </motion.button>
       </div>
 
-      {/* 🔥 MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -95,25 +90,18 @@ export default function Navbar() {
             >
               <HiX />
             </button>
-
             <ul className="flex flex-col items-start ml-16 mt-28 gap-y-6 font-semibold">
-              {["about", "skills", "projects", "contact"].map((section) => (
-                <motion.li key={section} whileHover={{ scale: 1.1 }}>
-                  <button onClick={() => scrollToSection(section)}>
-                    {section}
-                  </button>
+              {navLinks.map((section) => (
+                <motion.li key={section} whileHover={{ scale: 1.05 }}>
+                  <button onClick={() => scrollToSection(section)}>{section}</button>
                 </motion.li>
               ))}
-
-              <motion.a
-                href=""
-                className="relative inline-block px-4 py-2 font-semibold group"
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="relative inline-flex items-center px-4 py-2 font-semibold text-white bg-red-600 rounded"
               >
-                <span className="absolute inset-0 w-full h-full bg-red-600"></span>
-                <span className="relative text-white flex items-center gap-x-3">
-                  Resume <TbDownload size={16} />
-                </span>
-              </motion.a>
+                Contact Me
+              </button>
             </ul>
           </motion.div>
         )}
