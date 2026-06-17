@@ -31,10 +31,7 @@ export default function Skills() {
 
         {/* TITLE */}
         <motion.h2 className="text-2xl lg:text-4xl text-center font-bold tracking-wide">
-          My{" "}
-          <span className="text-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.4)]">
-            Skills
-          </span>
+          My <span className="text-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.4)]">Skills</span>
         </motion.h2>
 
         {/* SKILLS */}
@@ -56,17 +53,14 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
-
       </div>
 
       {/* 🔥 EDUCATION */}
       <div className="w-full my-8 py-10 lg:my-16 lg:py-16 bg-white">
         <motion.h2 className="text-2xl lg:text-4xl text-center font-bold tracking-wide">
-          My{" "}
-          <span className="text-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.4)]">
-            Education
-          </span>
+          My <span className="text-red-600 drop-shadow-[0_0_6px_rgba(239,68,68,0.4)]">Education</span>
         </motion.h2>
+<<<<<<< HEAD
         <div className="px-5 lg:px-28 mt-10 space-y-8">
           {/* UNIVERSITY */}
           <div className="border border-gray-300 p-6 rounded-lg hover:border-red-600 transition">
@@ -91,6 +85,36 @@ export default function Skills() {
             <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
               <h2 className="text-3xl font-bold">Pentesting</h2>
               <p>In Progress</p>
+=======
+
+        <div className="px-5 lg:px-28 mt-10 space-y-8">
+          <div className="border border-gray-300 p-6 rounded-lg hover:border-red-600 transition">
+            <h2 className="text-xl lg:text-2xl font-semibold">
+              Cybersecurity Student at <span className="text-red-600">Code 212</span>
+            </h2>
+            <p className="text-gray-500 mt-3">Ibn Zohr University — Agadir, Morocco</p>
+          </div>
+
+          <div className="border border-gray-300 p-6 rounded-lg hover:border-red-600 transition">
+            <h2 className="text-xl lg:text-2xl font-semibold">
+              Private Law Student at <span className="text-red-600">Ibn Zohr University (FSJES Agadir)</span>
+            </h2>
+            <p className="text-gray-500 mt-3">Ibn Zohr University (FSJES Agadir)</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-10">
+            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
+              <h2 className="text-3xl font-bold">+150</h2>
+              <p>Projects Completed</p>
+            </div>
+            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
+              <h2 className="text-3xl font-bold">+1 Years</h2>
+              <p>of learn tech</p>
+            </div>
+            <div className="border border-gray-300 p-6 rounded-lg hover:bg-red-600 hover:text-white transition">
+              <h2 className="text-3xl font-bold">Frontend</h2>
+              <p>Developer</p>
+>>>>>>> 94570f0 (Update site name to BRAHIM and education to Ibn Zohr University; rebuild assets)
             </div>
           </div>
         </div>
