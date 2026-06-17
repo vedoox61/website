@@ -71,11 +71,11 @@ export default function Skills() {
           {/* UNIVERSITY */}
           <div className="border border-gray-300 p-6 rounded-lg hover:border-red-600 transition">
             <h2 className="text-xl lg:text-2xl font-semibold">
-              Cybersecurity Student at{" "}
-              <span className="text-red-600">Code 212</span>
+              Private Law Student at {" "}
+              <span className="text-red-600">Ibn Zohr University (FSJES Agadir)</span>
             </h2>
             <p className="text-gray-500 mt-3">
-              Ibn Zohr University — Agadir, Morocco
+              Ibn Zohr University (FSJES Agadir)
             </p>
           </div>
           {/* STATS */}
@@ -95,7 +95,6 @@ export default function Skills() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

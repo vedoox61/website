@@ -48,10 +48,10 @@ git clone https://github.com/vedoox61/website.git
 ## 📬 Contact
 
 - Email: lachgarbrahim23@gmail.com   
-- Location: Agadir, Morocco  
-- LinkedIn: [LinkedIn](www.linkedin.com/in/brahim-lachgar-128931389)  
-- GitHub: [GitHub](https://github.com/vedoox61)  
-- Instagram: [Instagram](https://www.instagram.com/ur_brvv)
+ - Location: Agadir, Morocco
+ - LinkedIn: [LinkedIn](www.linkedin.com/in/brahim-lachgar-128931389)
+ - GitHub: [GitHub](https://github.com/vedoox61)
+ - Instagram: [Instagram](https://www.instagram.com/ur_brvv)
 
 ---
 
