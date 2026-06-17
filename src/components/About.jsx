@@ -34,9 +34,9 @@ export default function About() {
         <div className="w-16 h-[3px] bg-red-600 mt-2 mb-6 rounded"></div>
 
         <p className="text-gray-500 text-sm/6 lg:text-base leading-relaxed">
-          I'm a Law student at{' '}
+          Private Law Student at{' '}
           <span className="text-red-600 font-semibold">
-            Faculty of Law, Economics & Social Sciences — Ibn Zohr University (FSJES Agadir)
+            Ibn Zohr University (FSJES Agadir)
           </span>, based in Agadir. I combine legal studies with hands-on cybersecurity training to deliver secure digital experiences.
         </p>
 
