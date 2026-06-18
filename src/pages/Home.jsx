@@ -5,7 +5,6 @@ import { BiLogoGmail } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
 import VisitorOSINT from "../components/VisitorOSINT";
-import CyberToolset from "../components/CyberToolset";
 
 const HackTheBoxIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -15,6 +14,7 @@ const HackTheBoxIcon = ({ className }) => (
 
 export default function Home() {
   return (
+    // قمت بتصحيح الـ div هنا
     <div className="mt-20 bg-white text-black min-h-screen" id="home">
       <div className="flex justify-between py-10 items-center px-5 lg:px-28 lg:flex-row flex-col-reverse">
         {/* LEFT */}
@@ -37,7 +37,6 @@ export default function Home() {
               },
             }}
           >
-            {/* NAME */}
             <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
               Hello,{" "}
               <span className="text-red-500 font-extrabold">
@@ -48,18 +47,15 @@ export default function Home() {
                 />
               </span>
             </motion.h2>
-            {/* ROLE */}
             <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
               <span className="font-extrabold text-red-500">Cybersecurity</span>{" "}
               <span className="font-extrabold text-black">Student</span>
             </motion.h2>
-            {/* LOCATION */}
             <motion.h2 variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
               Based In <span className="font-extrabold text-red-500">Agadir, Morocco</span>
             </motion.h2>
           </motion.div>
 
-          {/* DESCRIPTION */}
           <motion.p
             className="text-gray-500 text-sm lg:text-base mt-6 leading-relaxed"
             initial={{ opacity: 0, y: 10 }}
@@ -69,7 +65,6 @@ export default function Home() {
             If you want to find me, look at the skate park or my room.
           </motion.p>
 
-          {/* SOCIAL ICONS */}
           <motion.div
             className="flex items-center gap-x-5 mt-10 lg:mt-14"
             initial={{ opacity: 0, y: 10 }}
@@ -130,11 +125,9 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* سيكشن الـ OSINT تيرمينال القديمة والشرح (رجعات مريحة ومتناسقة) */}
+      {/* سيكشن الـ OSINT */}
       <div className="w-full max-w-7xl mx-auto py-16 px-5 lg:px-28 mt-4 border-b border-gray-100">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          
-          {/* الجانب الأيسر: التيرمينال */}
           <motion.div
             className="w-full flex justify-start"
             initial={{ opacity: 0, x: -30 }}
@@ -144,7 +137,6 @@ export default function Home() {
             <VisitorOSINT />
           </motion.div>
 
-          {/* الجانب الأيمن: النص التعريفي الاحترافي */}
           <motion.div
             className="flex flex-col justify-center space-y-4 font-mono text-gray-700 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
             initial={{ opacity: 0, x: 30 }}
@@ -169,30 +161,8 @@ export default function Home() {
               <strong>تنبيه أمني:</strong> لا يتم تسريب، حفظ، أو مشاركة أي بيانات حقيقية. هذه المحاكاة تعمل بشكل آمن تماماً داخل الذاكرة المؤقتة لأغراض العرض واختبار المفاهيم الأمنية فقط.
             </div>
           </motion.div>
-
         </div>
       </div>
-
-      {/* الـ WORKSPACE الجديد الخاص بالأدوات كامل المساحة (Full Width) */}
-      <div className="w-full max-w-7xl mx-auto pt-16 pb-28 px-5 lg:px-28" id="tools">
-        <motion.div
-          className="w-full"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="mb-6">
-            <h2 className="text-2xl font-extrabold text-black uppercase tracking-tight flex items-center gap-2">
-              <span className="text-red-500">//</span> Pentesting & Dev Toolset
-            </h2>
-            <p className="text-gray-500 text-xs mt-1">A dedicated workspace for advanced cybersecurity client-side utilities.</p>
-          </div>
-
-          {/* استدعاء الأدوات بالمساحة الكاملة الكبيرة */}
-          <CyberToolset />
-        </motion.div>
-      </div>
-    </div>
+    </div> // هنا سدينا الـ div اللي صلحناها
   );
 }
