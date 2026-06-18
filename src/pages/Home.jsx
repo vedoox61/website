@@ -4,11 +4,12 @@ import { IoLogoLinkedin, IoLogoInstagram } from "react-icons/io5";
 import { BiLogoGmail } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
+import VisitorOSINT from "../components/VisitorOSINT";
 
 // HackTheBox SVG icon component
 const HackTheBoxIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11.996 0L3 4.9v9.8l2-1.151V6.051l6.996-4.04L18.999 6v1.599l2 1.151V4.9L11.996 0zM11 8.464v2.302L9 9.614V7.312L11 8.464zm2 0l2-1.152v2.302l-2 1.152V8.464zM8 6.16L12 3.856l4 2.304-4 2.304L8 6.16zm-5 8.589l2-1.152v2.302l-2 1.152V14.75zm16-1.152l2 1.152v2.302l-2-1.152V13.6zM11 19.136v2.302L5.004 18.1v-2.302L11 19.136zm2 2.302v-2.302l5.996-3.338V18.1L13 21.438zM3 14.9v4.2l8.996 4.9L21 19.1v-4.2l-2-1.151v3.049l-7 4.04-7-4.04V13.75L3 14.9z"/>
+    <path d="M11.996 0L3 4.9v9.8l2-1.151V6.051l6.996-4.04L18.999 6v1.599l2 1.151V4.9L11.996 0zM11 8.464v2.302L9 9.614V7.312L11 8.464zm2 0l2-1.152v2.302l-2 1.152V8.464zM8 6.16L12 3.856l4 2.304-4 2.304L8 6.16zm-5 8.589l2-1.152v2.302l-2 1.152V14.75zm16-1.152l2 1.152v2.302l-2-1.152V13.6zM11 19.136v2.302L5.004 18.1v-2.302L11 19.136zm2 2.302v-2.302l5.996-3.338V18.1L13 21.438zM3 14.9v4.2l8.996 4.9L21 19.1 v-4.2l-2-1.151v3.049l-7 4.04-7-4.04V13.75L3 14.9z"/>
   </svg>
 );
 
@@ -128,6 +129,49 @@ export default function Home() {
             alt="Hero"
           />
         </motion.div>
+      </div>
+
+      {/* سيكشن الـ OSINT والوصف مقسومة على جوج */}
+      <div className="w-full max-w-7xl mx-auto pb-20 px-5 lg:px-28 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          
+          {/* الجانب الأيسر: التيرمينال تحت الأيقونات */}
+          <motion.div
+            className="w-full flex justify-start"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
+          >
+            <VisitorOSINT />
+          </motion.div>
+
+          {/* الجانب الأيمن: النص التعريفي بالشرح الاحترافي */}
+          <motion.div
+            className="flex flex-col justify-center space-y-4 font-mono text-gray-700 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+          >
+            <div className="flex items-center gap-2 text-red-500 font-bold text-sm">
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
+              <span>[!] SYSTEM NOTICE</span>
+            </div>
+            
+            <h3 className="text-lg font-extrabold text-black uppercase tracking-tight">
+              About This Tool // OSINT Recon
+            </h3>
+            
+            <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+              هذه الأداة التفاعلية عبارة عن محاكي لأساليب الـ <span className="text-red-500 font-bold">OSINT (Open Source Intelligence)</span>، تم تطويرها من طرف <span className="font-bold text-black">Brahim Lachgar</span>. 
+              توضح هذه المحاكاة كيف يمكن لأي نظام فحص واستخراج البيانات العامة والميتا-داتا الخاصة بالشبكة بمجرد زيارة المنصة.
+            </p>
+
+            <div className="p-3 bg-red-50 border-l-4 border-red-500 text-[11px] md:text-xs text-red-700 rounded-r">
+              <strong>تنبيه أمني:</strong> لا يتم تسريب، حفظ، أو مشاركة أي بيانات حقيقية. هذه المحاكاة تعمل بشكل آمن تماماً داخل الذاكرة المؤقتة لأغراض العرض واختبار المفاهيم الأمنية فقط.
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </div>
   );
