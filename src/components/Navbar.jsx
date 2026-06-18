@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import { TbExternalLink } from "react-icons/tb";
 
-const navLinks = ["about", "skills", "projects", "contact"];
+// الأزرار لي غاتبان ف الـ Navbar
+const navLinks = ["about", "skills", "projects", "tools", "contact"];
 
 export default function Navbar() {
   const [hasShadow, setHasShadow] = useState(false);
@@ -15,7 +16,35 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // دالة التنقل الذكية بين الـ سيكشنز والصفحات المستقلة
   const scrollToSection = (id) => {
+    // 1. إذا كليكا على "tools" كيديه للباج الجديدة نيشان باستخدام مسار الـ HashRouter
+    if (id === "tools") {
+      window.location.href = "/#/tools";
+      window.scrollTo(0, 0); // كيطير لـ فوق كاع ف الباج الجديدة
+      setIsOpen(false);
+      return;
+    }
+
+    // 2. إذا كان الزائر ديجا ف صفحة الـ /tools وكليكا على شي زر آخر (بحال About أو Projects)
+    // خاص يرجعو للباج الرئيسية أولاً (/) عاد يدير السكرول
+    if (window.location.hash.includes("/tools")) {
+      window.location.href = "/#/";
+      // كنديرو تأخير بسيط جداً باش الباج الرئيسية تلوودا عاد يسكرولي للـ ID
+      setTimeout(() => {
+        const section = document.getElementById(id);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 110,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+      setIsOpen(false);
+      return;
+    }
+
+    // 3. السكرول العادي داخل الصفحة الرئيسية (Home)
     const section = document.getElementById(id);
     if (section) {
       window.scrollTo({
@@ -36,14 +65,22 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
+        {/* اللوغو عند الضغط عليه يرجع للـ Home الفوق */}
         <motion.h1
-          onClick={() => scrollToSection("home")}
+          onClick={() => {
+            if (window.location.hash.includes("/tools")) {
+              window.location.href = "/#/";
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="text-2xl lg:text-3xl font-extrabold cursor-pointer tracking-widest"
           whileHover={{ scale: 1.1 }}
         >
           <span className="text-red-600">B</span>RAHIM
         </motion.h1>
 
+        {/* أزرار الـ Desktop */}
         <ul className="hidden lg:flex items-center gap-x-7 font-semibold">
           {navLinks.map((section) => (
             <motion.li key={section} whileHover={{ scale: 1.05 }} className="group">
@@ -55,6 +92,7 @@ export default function Navbar() {
           ))}
         </ul>
 
+        {/* زر Contact الجانبي */}
         <button
           onClick={() => scrollToSection("contact")}
           className="hidden relative lg:inline-flex items-center px-5 py-2 font-medium group"
@@ -66,6 +104,7 @@ export default function Navbar() {
           </span>
         </button>
 
+        {/* زر فتح القائمة ف الهواتف */}
         <motion.button
           className="lg:hidden text-2xl text-black"
           onClick={() => setIsOpen(!isOpen)}
@@ -75,6 +114,7 @@ export default function Navbar() {
         </motion.button>
       </div>
 
+      {/* الـ Mobile Menu متناسق بالكامل */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -82,7 +122,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden fixed top-0 right-0 h-full w-full bg-white text-black"
+            className="lg:hidden fixed top-0 right-0 h-full w-full bg-white text-black z-50"
           >
             <button
               className="absolute top-5 right-5 text-2xl"
@@ -93,7 +133,9 @@ export default function Navbar() {
             <ul className="flex flex-col items-start ml-16 mt-28 gap-y-6 font-semibold">
               {navLinks.map((section) => (
                 <motion.li key={section} whileHover={{ scale: 1.05 }}>
-                  <button onClick={() => scrollToSection(section)}>{section}</button>
+                  <button onClick={() => scrollToSection(section)}>
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </button>
                 </motion.li>
               ))}
               <button

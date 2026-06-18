@@ -5,8 +5,8 @@ import { BiLogoGmail } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
 import { TypeAnimation } from "react-type-animation";
 import VisitorOSINT from "../components/VisitorOSINT";
+import CyberToolset from "../components/CyberToolset";
 
-// HackTheBox SVG icon component
 const HackTheBoxIcon = ({ className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path d="M11.996 0L3 4.9v9.8l2-1.151V6.051l6.996-4.04L18.999 6v1.599l2 1.151V4.9L11.996 0zM11 8.464v2.302L9 9.614V7.312L11 8.464zm2 0l2-1.152v2.302l-2 1.152V8.464zM8 6.16L12 3.856l4 2.304-4 2.304L8 6.16zm-5 8.589l2-1.152v2.302l-2 1.152V14.75zm16-1.152l2 1.152v2.302l-2-1.152V13.6zM11 19.136v2.302L5.004 18.1v-2.302L11 19.136zm2 2.302v-2.302l5.996-3.338V18.1L13 21.438zM3 14.9v4.2l8.996 4.9L21 19.1 v-4.2l-2-1.151v3.049l-7 4.04-7-4.04V13.75L3 14.9z"/>
@@ -98,7 +98,6 @@ export default function Home() {
                 <Icon className="w-5 h-5" />
               </motion.a>
             ))}
-            {/* HackTheBox Icon */}
             <motion.a
               href="https://profile.hackthebox.com/profile/019ea113-7a11-72d4-8b66-d5949b868a01"
               target="_blank"
@@ -131,26 +130,26 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* سيكشن الـ OSINT والوصف مقسومة على جوج */}
-      <div className="w-full max-w-7xl mx-auto pb-20 px-5 lg:px-28 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      {/* سيكشن الـ OSINT تيرمينال القديمة والشرح (رجعات مريحة ومتناسقة) */}
+      <div className="w-full max-w-7xl mx-auto py-16 px-5 lg:px-28 mt-4 border-b border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           
-          {/* الجانب الأيسر: التيرمينال تحت الأيقونات */}
+          {/* الجانب الأيسر: التيرمينال */}
           <motion.div
             className="w-full flex justify-start"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
             <VisitorOSINT />
           </motion.div>
 
-          {/* الجانب الأيمن: النص التعريفي بالشرح الاحترافي */}
+          {/* الجانب الأيمن: النص التعريفي الاحترافي */}
           <motion.div
             className="flex flex-col justify-center space-y-4 font-mono text-gray-700 bg-gray-50 p-6 rounded-md border border-gray-200 shadow-sm"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
           >
             <div className="flex items-center gap-2 text-red-500 font-bold text-sm">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
@@ -172,6 +171,27 @@ export default function Home() {
           </motion.div>
 
         </div>
+      </div>
+
+      {/* الـ WORKSPACE الجديد الخاص بالأدوات كامل المساحة (Full Width) */}
+      <div className="w-full max-w-7xl mx-auto pt-16 pb-28 px-5 lg:px-28" id="tools">
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="mb-6">
+            <h2 className="text-2xl font-extrabold text-black uppercase tracking-tight flex items-center gap-2">
+              <span className="text-red-500">//</span> Pentesting & Dev Toolset
+            </h2>
+            <p className="text-gray-500 text-xs mt-1">A dedicated workspace for advanced cybersecurity client-side utilities.</p>
+          </div>
+
+          {/* استدعاء الأدوات بالمساحة الكاملة الكبيرة */}
+          <CyberToolset />
+        </motion.div>
       </div>
     </div>
   );

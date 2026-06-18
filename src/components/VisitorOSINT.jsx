@@ -124,18 +124,21 @@ export default function VisitorOSINT() {
             </motion.p>
             <div className="space-y-1">
               {lines.slice(0, visibleLines).map((line, i) => (
-                <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="whitespace-pre">
-                  {line}
+                <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="whitespace-pre flex items-center">
+                  <span>{line}</span>
+                  {/* الكورسور يظهر ملاصق للسطر الحالي فقط أثناء الطباعة */}
                   {i === visibleLines - 1 && visibleLines < lines.length && (
-                    <span className="inline-block w-2 h-4 bg-green-400 ml-1 align-middle animate-pulse" />
+                    <span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse" />
                   )}
                 </motion.p>
               ))}
 
+              {/* فاش كيسالي الطباعة، الكورسور كيهبط لتحت مع سطر أوامر جديد أنيق */}
               {visibleLines >= lines.length && (
-                <p className="mt-1">
-                  <span className="inline-block w-2 h-4 bg-green-400 align-middle animate-pulse" />
-                </p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-green-500/70 pt-1 flex items-center gap-1">
+                  <span>root@visitor:~$</span>
+                  <span className="inline-block w-2 h-4 bg-green-400 animate-pulse" />
+                </motion.p>
               )}
             </div>
           </motion.div>
