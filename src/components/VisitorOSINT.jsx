@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API_URL = "https://ipapi.co/json/";
-
 const STAGE = {
   SCANNING: "scanning",
   SPOTTED: "spotted",
-  ERROR: "error",
 };
 
 function parseUserAgent(ua) {
@@ -30,67 +27,98 @@ export default function VisitorOSINT() {
   const [stage, setStage] = useState(STAGE.SCANNING);
   const [data, setData] = useState(null);
   const [visibleLines, setVisibleLines] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  useEffect(() => {
-    let timeout;
+  const fetchInfo = async () => {
+    setStage(STAGE.SCANNING);
+    setVisibleLines(0);
+    setErrorMsg("");
+    setData(null);
+
     const start = Date.now();
 
-    fetch(API_URL)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-        return res.json();
-      })
-      .then((json) => {
-        const { os, browser } = parseUserAgent(navigator.userAgent);
-        const elapsed = Date.now() - start;
-        const delay = Math.max(1400 - elapsed, 0);
-        timeout = setTimeout(() => {
-          setData({
-            ip: json.ip ?? "UNKNOWN",
-            country: json.country_name ?? "UNKNOWN",
-            city: json.city ?? "UNKNOWN",
-            lat: json.latitude ?? "?",
-            lon: json.longitude ?? "?",
-            isp: json.org ?? "UNKNOWN",
-            os,
-            browser,
-          });
-          setStage(STAGE.SPOTTED);
-        }, delay);
-      })
-      .catch(() => {
-        const { os, browser } = parseUserAgent(navigator.userAgent);
-        timeout = setTimeout(() => {
-          setData({
-            ip: "105.158.28.194 (DEV_ENV)",
-            country: "Morocco",
-            city: "Agadir",
-            lat: "30.4189",
-            lon: "-9.5929",
-            isp: "Maroc Telecom (IAM)",
-            os,
-            browser,
-          });
-          setStage(STAGE.SPOTTED);
-        }, 1200);
+    try {
+      // API قوي يعطي IP + Country + City + ISP
+      const res = await fetch("https://ip-api.com/json/?fields=status,message,country,city,lat,lon,isp,query", {
+        cache: "no-store"
       });
 
-    return () => clearTimeout(timeout);
+      if (!res.ok) throw new Error("Failed");
+
+      const json = await res.json();
+
+      if (json.status === "fail") throw new Error(json.message);
+
+      const { os, browser } = parseUserAgent(navigator.userAgent);
+      const delay = Math.max(1000 - (Date.now() - start), 0);
+
+      setTimeout(() => {
+        const newData = {
+          ip: json.query || "UNKNOWN",
+          country: json.country || "UNKNOWN",
+          city: json.city || "Unknown",
+          lat: json.lat ? json.lat.toFixed(4) : "?",
+          lon: json.lon ? json.lon.toFixed(4) : "?",
+          isp: json.isp || "Unknown",
+          os,
+          browser,
+        };
+        setData(newData);
+        setStage(STAGE.SPOTTED);
+
+        // Geolocation دقيقة (تطلب إذن من المستخدم)
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              setData(prev => ({
+                ...prev,
+                lat: pos.coords.latitude.toFixed(4),
+                lon: pos.coords.longitude.toFixed(4),
+              }));
+            },
+            (err) => {
+              console.log("Geolocation permission denied");
+            }
+          );
+        }
+      }, delay);
+
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("جاري استخدام معلومات محدودة...");
+
+      const { os, browser } = parseUserAgent(navigator.userAgent);
+      setTimeout(() => {
+        setData({
+          ip: "Detected",
+          country: "Morocco",
+          city: "Unknown",
+          lat: "?",
+          lon: "?",
+          isp: "Unknown",
+          os,
+          browser,
+        });
+        setStage(STAGE.SPOTTED);
+      }, 800);
+    }
+  };
+
+  useEffect(() => {
+    fetchInfo();
   }, []);
 
-  const lines = data
-    ? [
-        `IP ADDRESS......${data.ip}`,
-        `LOCATION........${data.city}, ${data.country}`,
-        `COORDINATES.....${data.lat}, ${data.lon}`,
-        `ISP.............${data.isp}`,
-        `SYSTEM..........${data.os} / ${data.browser}`,
-      ]
-    : [];
+  const lines = data ? [
+    `IP ADDRESS......${data.ip}`,
+    `LOCATION........${data.city}, ${data.country}`,
+    `COORDINATES.....${data.lat}, ${data.lon}`,
+    `ISP.............${data.isp}`,
+    `SYSTEM..........${data.os} / ${data.browser}`,
+  ] : [];
 
   useEffect(() => {
     if (stage !== STAGE.SPOTTED || visibleLines >= lines.length) return;
-    const t = setTimeout(() => setVisibleLines((n) => n + 1), 260);
+    const t = setTimeout(() => setVisibleLines(n => n + 1), 260);
     return () => clearTimeout(t);
   }, [stage, visibleLines, lines.length]);
 
@@ -111,36 +139,32 @@ export default function VisitorOSINT() {
           </motion.div>
         )}
 
-        {stage === STAGE.ERROR && (
-          <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-500">
-            {">"} CONNECTION LOST. TARGET CLOAKED.
-          </motion.div>
-        )}
-
         {stage === STAGE.SPOTTED && (
           <motion.div key="spotted" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <motion.p initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} className="text-green-300 font-bold mb-2 tracking-wider">
               {">"} TARGET SPOTTED
             </motion.p>
+
+            {errorMsg && <p className="text-yellow-400 text-xs mb-3">{errorMsg}</p>}
+
             <div className="space-y-1">
               {lines.slice(0, visibleLines).map((line, i) => (
-                <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="whitespace-pre flex items-center">
-                  <span>{line}</span>
-                  {/* الكورسور يظهر ملاصق للسطر الحالي فقط أثناء الطباعة */}
-                  {i === visibleLines - 1 && visibleLines < lines.length && (
-                    <span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse" />
-                  )}
+                <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="whitespace-pre">
+                  {line}
                 </motion.p>
               ))}
-
-              {/* فاش كيسالي الطباعة، الكورسور كيهبط لتحت مع سطر أوامر جديد أنيق */}
-              {visibleLines >= lines.length && (
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs text-green-500/70 pt-1 flex items-center gap-1">
-                  <span>root@visitor:~$</span>
-                  <span className="inline-block w-2 h-4 bg-green-400 animate-pulse" />
-                </motion.p>
-              )}
             </div>
+
+            <button
+              onClick={fetchInfo}
+              className="mt-4 px-4 py-1 text-xs border border-green-500/50 hover:bg-green-500/10 transition-colors rounded flex items-center gap-2 mx-auto"
+            >
+              🔄 Retry Scan
+            </button>
+
+            <p className="text-[10px] text-green-500/50 mt-3 text-center">
+              Note: Coordinates need your permission
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
